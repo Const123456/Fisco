@@ -25,9 +25,37 @@ WeBASE-Front是和FISCO-BCOS节点配合使用的一个子系统。此分支支�
 # 1, 做好上述准备后,在浏览器中访问 WeBASE-Front
 ![image](https://user-images.githubusercontent.com/103564714/163139344-af2beea2-31c8-45ef-8d92-1966b0240cc1.png)
 
-# 2, 编写智能合约，本文将用简单的领养宠物合约作为案例
-![image](https://user-images.githubusercontent.com/103564714/163139750-94cb1cd5-5d4b-462f-98b4-425c671ec472.png)
-![image](https://user-images.githubusercontent.com/103564714/163139781-7d914126-aaf2-4309-b282-38dd6695d225.png)
+# 2, 编写智能合约，本文将用简单的登陆注册合约作为案例
+```
+pragma solidity ^0.4.24;
+
+contract Adoption {
+
+  uint8 userIndex;
+  
+  mapping(address => uint8) userMapping;
+
+  // 保存领养者的地址
+  address[8] public adopters;  
+  
+  constructor() public {
+      userIndex = 0;
+  }
+  
+  //用户注册
+  function register(address user) public returns(uint8) {
+      userIndex++;
+      userMapping[user] = userIndex;
+      return userIndex;
+  }
+  
+  //判断用户是否可以登录（>0）
+  function login(address user) public view returns(uint8) {
+      return userMapping[user];
+  }
+
+}
+```
 
 # 3, 保存编译部署合约成功后 会生成合约地址,合约名称，合约ABI等，在后续都将会用到(部署合约前，需在测试用户中创建用户)
 ![image](https://user-images.githubusercontent.com/103564714/163151209-f4375aae-8d10-4061-9000-bfef53be56be.png)
