@@ -1,7 +1,7 @@
 # Fisco-Bcos & WeBASE-Front
 作者: 深职院-符博<br>
 本文内容: 通过WeBASE-Front中间件部署合约 并调用其自带接口WeBASE-Front/trans/handle发送交易
-
+温馨提示: 本文调用WeBASE-Front交易接口运用的技术栈是springboot,需要有springboot的基础~
 
 ---------------------------------------
 # Fisco-Bcos简介: <br>
