@@ -88,6 +88,7 @@ contract Adoption {
       <version>5.8.0.M2</version>
   </dependency>
 ```
+hutool官方文档: https://www.hutool.cn/
 # 5, 在写后端接口前，先熟悉一下调用WeBASE-Front自带接口WeBASE-Front/trans/handle发送交易时所需的参数要求
 ![image](https://user-images.githubusercontent.com/103564714/163154396-8a02cdd3-b0d9-4982-85e3-5254c8db72af.png)
 ![image](https://user-images.githubusercontent.com/103564714/163154417-610a982d-4353-4b9b-bad4-c57263f0fd84.png)<br>
@@ -239,6 +240,18 @@ public class controller {
 }
 
 ```
+
+# 7, 使用postman进行测试
+![image](https://user-images.githubusercontent.com/103564714/163156930-ef9e062c-8535-4484-b9dd-ae46906c0293.png)
+![image](https://user-images.githubusercontent.com/103564714/163156949-560fd029-8a78-48b3-b20e-ecc4e1901c99.png)
+
+# 8, 查看WeBASE-Front区块高度和交易记录会发现都有所新增
+![image](https://user-images.githubusercontent.com/103564714/163157058-1138fed9-5728-4411-99ed-0353dac429ec.png)
+
+
+
+
+
 
 
 
