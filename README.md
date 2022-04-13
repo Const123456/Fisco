@@ -25,7 +25,7 @@ WeBASE-Front是和FISCO-BCOS节点配合使用的一个子系统。此分支支�
 # 1, 做好上述准备后,在浏览器中访问 WeBASE-Front
 ![image](https://user-images.githubusercontent.com/103564714/163139344-af2beea2-31c8-45ef-8d92-1966b0240cc1.png)
 
-# 2, 编写智能合约，本文将用简单的登陆注册合约作为案例
+# 2, 编写智能合约，本文将用简单的领养宠物合约作为案例
 ```
 pragma solidity ^0.4.24;
 
@@ -54,6 +54,25 @@ contract Adoption {
       return userMapping[user];
   }
 
+    // 领养宠物
+  function adopt(uint petId) public returns (uint) {
+    // 确保id在数组长度内
+    require(petId >= 0 && petId <= 7);  
+    
+    uint userNotExist = 404;
+    if (userMapping[msg.sender] == 0) {
+        return userNotExist;
+    }
+    // 保存调用这地址 
+    adopters[petId] = msg.sender;        
+    return petId;
+  }
+
+  // 返回领养者
+  function getAdopters() public view returns (address[8]) {
+    return adopters;
+  }
+
 }
 ```
 
@@ -75,6 +94,151 @@ contract Adoption {
 官方文档说明: https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/interface.html#id392
 
 # 6, 根据合约内容去写后端调用的逻辑(这里只简单的测试两个登录和注册的功能)
+```
+package com.example;
+
+import cn.hutool.json.JSONArray;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+import java.io.IOException;
+import java.util.List;
+
+
+@RestController
+@RequestMapping("/pet")
+public class controller {
+
+    // 调用WeBASE-Front中间件交易接口 在windows做测试 192.168.239.133为ubuntu虚拟机的ip地址
+    private static final String URL = "http://192.168.239.133:5002/WeBASE-Front/trans/handle";
+
+    // 合约名称
+    private static final String CONTRACT_NAME = "Adoption";
+
+    // 合约地址
+    private static final String CONTRACT_ADDRESS = "0x3deadcfbe5ee16e2f93532536cccc64eb8c3af94";
+
+    // 合约ABI
+    private static final String CONTRACT_ABI = "[{\"constant\":true,\"inputs\":[{\"name\":\"user\",\"type\":\"address\"}],\"name\":\"login\",\"outputs\":[{\"name\":\"\",\"type\":\"uint8\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getAdopters\",\"outputs\":[{\"name\":\"\",\"type\":\"address[8]\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"adopters\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"user\",\"type\":\"address\"}],\"name\":\"register\",\"outputs\":[{\"name\":\"\",\"type\":\"uint8\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"petId\",\"type\":\"uint256\"}],\"name\":\"adopt\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}]";
+
+
+    // 用户地址(本文因合约登陆注册方法传入的就是用户地址 所以这里可以选择不设置常量)
+    // private static final String TEST_USER = "0x5851739e2fed4ea87db565eaea63549c78a070df";
+
+    // RestTemplate 是从 Spring3.0 开始支持的一个 HTTP 请求工具，
+    // 它提供了常见的REST请求方案的模版，例如 GET 请求、POST 请求、PUT 请求、DELETE
+    // 本文用他来发送请求
+    RestTemplate restTemplate = new RestTemplate();
+
+
+
+    // 注册
+    @PostMapping("/register")
+    public String Register(@RequestParam String address) throws IOException {
+        // _JsonOutPut 返回给前端的内容
+        JSONObject _jsonOutPut = new JSONObject();
+
+        // 调用WeBASE-Front中间件交易接口需传入的参数为json格式
+        JSONObject _jsonObj = new JSONObject();
+
+        // param为合约方法需要传入的参数, 此方法为Login登录 传入的是一个用户地址 官方要求格式为:JSON数组，多个参数以逗号分隔
+        // 此操作就是将入参address转为JSON数组类型
+        List param = new ObjectMapper().readValue("[" + "\"" + address + "\"" + "]",List.class);
+
+        // 合约名称
+        _jsonObj.putOpt("contractName",CONTRACT_NAME);
+        // 合约地址
+        _jsonObj.putOpt("contractAddress",CONTRACT_ADDRESS);
+        // 合约ABI 官方要求格式为:JSONArray
+        _jsonObj.putOpt("contractAbi", JSONUtil.parseArray(CONTRACT_ABI));
+        // 用户地址 此方法直接调用入参address为用户地址
+        _jsonObj.putOpt("user",address);
+        // 方法名称 对应合约 “login”
+        _jsonObj.putOpt("funcName","register");
+        // 方法参数
+        _jsonObj.putOpt("funcParam",param);
+
+        // 用restTemplate.postForEntity调用其接口 URL为路径,_jsonObj为调用WeBASE-Front中间件交易接口需传入的参数,String.class为返回值类型
+        ResponseEntity<String> stringResponseEntity = restTemplate.postForEntity(URL, _jsonObj, String.class);
+
+        // 获取返回值的body
+        String body = stringResponseEntity.getBody();
+        // 将body转为Json数组格式
+        JSONObject responseJson = JSONUtil.parseObj(body);
+        // 获取返回值中的message的值 key-value的形式获取
+        String msg = responseJson.getStr("message");
+        // 判断逻辑 如果为Success则注册成功
+        if (msg.equals("Success")){
+            // 注册成功返回给前端的值
+            _jsonOutPut.putOpt("ret",1);
+            _jsonOutPut.putOpt("msg",msg);
+        }else {
+            // 注册失败 返回给前端的值
+            _jsonOutPut.putOpt("ret",0);
+            _jsonOutPut.putOpt("msg",msg);
+        }
+        return _jsonOutPut.toString();
+    }
+
+
+    // 登录
+    @PostMapping("/login")
+    public String Login(@RequestParam String address) throws IOException {
+        // _JsonOutPut 返回给前端的内容
+        JSONObject _jsonOutPut = new JSONObject();
+
+        // 调用WeBASE-Front中间件交易接口需传入的参数为json格式
+        JSONObject _jsonObj = new JSONObject();
+
+        // param为合约方法需要传入的参数, 此方法为Login登录 传入的是一个用户地址 官方要求格式为:JSON数组，多个参数以逗号分隔
+        // 此操作就是将入参address转为JSON数组类型
+        JSONArray param = new ObjectMapper().readValue("[" + "\"" + address + "\"" + "]", JSONArray.class);
+
+        // 合约名称
+        _jsonObj.putOpt("contractName",CONTRACT_NAME);
+        // 合约地址
+        _jsonObj.putOpt("contractAddress",CONTRACT_ADDRESS);
+        // 合约ABI 官方要求格式为:JSONArray
+        _jsonObj.putOpt("contractAbi", JSONUtil.parseArray(CONTRACT_ABI));
+        // 用户地址 此方法直接调用入参address为用户地址
+        _jsonObj.putOpt("user",address);
+        // 方法名称 对应合约 “login”
+        _jsonObj.putOpt("funcName","login");
+        // 方法参数
+        _jsonObj.putOpt("funcParam",param);
+
+        // 用restTemplate.postForEntity调用其接口 URL为路径,_jsonObj为调用WeBASE-Front中间件交易接口需传入的参数,String.class为返回值类型
+        ResponseEntity<String> stringResponseEntity = restTemplate.postForEntity(URL, _jsonObj, String.class);
+        // 获取返回值的body
+        String body = stringResponseEntity.getBody();
+        // 将返回值转为List类型方便获取
+        List list = new ObjectMapper().readValue(body,List.class);
+        // 获取返回值
+        String result = list.get(0).toString();
+
+        // 合约登录逻辑判断 如果返回值为0 则登录失败
+        if (result.equals("0")){
+            // _jsonOutPut 登陆失败返回给前端的内容
+            _jsonOutPut.putOpt("ret",0);
+            _jsonOutPut.putOpt("msg",false);
+        }else {
+            // _jsonOutPut 登陆成功返回给前端的内容
+            _jsonOutPut.putOpt("ret",1);
+            _jsonOutPut.putOpt("msg",true);
+        }
+        return _jsonOutPut.toString();
+    }
+
+}
+
+```
 
 
 
