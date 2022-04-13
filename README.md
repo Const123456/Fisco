@@ -16,3 +16,7 @@ WeBASE（WeBank Blockchain Application Software Extension） 是在区块链应�
 # WeBASE-Front简介: <br>
 WeBASE-Front是和FISCO-BCOS节点配合使用的一个子系统。此分支支持FISCO-BCOS 2.0以上版本，集成web3sdk，对接口进行了封装，可通过HTTP请求和节点进行通信。另外，具备可视化控制台，可以在控制台上开发智能合约，部署合约和发送交易，并查看交易和区块详情。还可以管理私钥，对节点健康度进行监控和统计。<br>
 官方网址: https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/README.html
+
+# 使用说明
+需提前在本地搭建一条4节点的FISCO-BCOS链 官方文档教程: https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/installation.html
+需提前搭建好WeBASE-Front中间件 官方文档教程: https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/install.html
