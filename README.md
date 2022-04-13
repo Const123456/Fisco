@@ -18,5 +18,5 @@ WeBASE-Front是和FISCO-BCOS节点配合使用的一个子系统。此分支支�
 官方网址: https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/README.html
 
 # 使用说明
-需提前在本地搭建一条4节点的FISCO-BCOS链 官方文档教程: https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/installation.html
-需提前搭建好WeBASE-Front中间件 官方文档教程: https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/install.html
+需提前在本地搭建一条4节点的FISCO-BCOS链: <br>官方文档教程: https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/installation.html
+需提前搭建好WeBASE-Front中间件: <br> 官方文档教程: https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/install.html
