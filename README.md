@@ -24,3 +24,10 @@ WeBASE-Front是和FISCO-BCOS节点配合使用的一个子系统。此分支支�
 
 # 1, 做好上述准备后,在浏览器中访问 WeBASE-Front
 ![image](https://user-images.githubusercontent.com/103564714/163139344-af2beea2-31c8-45ef-8d92-1966b0240cc1.png)
+
+# 2, 编写智能合约，本文将用简单的领养宠物合约作为案例
+![image](https://user-images.githubusercontent.com/103564714/163139750-94cb1cd5-5d4b-462f-98b4-425c671ec472.png)
+![image](https://user-images.githubusercontent.com/103564714/163139781-7d914126-aaf2-4309-b282-38dd6695d225.png)
+
+
+
