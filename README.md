@@ -36,6 +36,13 @@ WeBASE-Front是和FISCO-BCOS节点配合使用的一个子系统。此分支支�
 ![image](https://user-images.githubusercontent.com/103564714/163153688-b2cd45b0-808c-446e-932a-489aa5067fee.png)
 ![image](https://user-images.githubusercontent.com/103564714/163153713-9a133b60-f18b-4129-bb94-95bd803f3e2e.png)
 
+# 5, 在写后端接口前，先熟悉一下调用WeBASE-Front自带接口WeBASE-Front/trans/handle发送交易时所需的参数要求
+![image](https://user-images.githubusercontent.com/103564714/163154396-8a02cdd3-b0d9-4982-85e3-5254c8db72af.png)
+![image](https://user-images.githubusercontent.com/103564714/163154417-610a982d-4353-4b9b-bad4-c57263f0fd84.png)<br>
+官方文档说明: https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Front/interface.html#id392
+
+# 6, 根据合约内容去写后端调用的逻辑(这里只简单的测试两个登录和注册的功能)
+
 
 
 
