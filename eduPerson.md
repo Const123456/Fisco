@@ -63,13 +63,16 @@ contract eduPersonStorage {
         accountCount.push(_account);
     }
     
+    // 判断用户是否存在
     function userExists(string _type, string _account) internal view returns(bool) {
         if (accountMap[_type][_account].isVaild) {
             return true;
         } 
             return false;
     }
-
+    
+    
+    // 判断用户id是否存在
     function userIdExists(string _id) internal view returns(bool) {
         if(id2PersonMap[_id].isVaild){
             return true;
