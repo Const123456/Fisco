@@ -179,8 +179,8 @@ contract eduPerson is eduPersonStorage {
 工作人员注册Param : ["3","13666","123456","1353698789","2622@qq.com","zs","sz","rgzn","blockchain","2"]
 工作人员登录Param : ["13666","123456"]
 ```
+用户测试结果
 
-// 用户测试结果
 ![image](https://user-images.githubusercontent.com/103564714/164889199-f8b5b42b-c877-40c0-9c48-2c8028fbc50b.png)
 ![image](https://user-images.githubusercontent.com/103564714/164889206-2e2cd1b7-b9c1-404a-bf73-c93f62438a39.png)
 ![image](https://user-images.githubusercontent.com/103564714/164889222-405200b6-09dd-4a9f-b9c3-fbda890ac6b2.png)
