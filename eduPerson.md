@@ -204,7 +204,8 @@ contract eduPerson is eduPersonStorage {
 ![image](https://user-images.githubusercontent.com/103564714/164889471-5a860434-8953-4c49-b140-8a7b81215d9a.png)
 ![image](https://user-images.githubusercontent.com/103564714/164889474-a874f3a6-a5ae-4948-8f80-0d91b87dff19.png)
 ![image](https://user-images.githubusercontent.com/103564714/164889480-f21a9983-f359-4e1b-ad31-498f23b38fca.png)
-![image](https://user-images.githubusercontent.com/103564714/164889482-79ede1cc-66b0-4001-bf3f-ffb53baa3ac7.png)
+![image](https://user-images.githubusercontent.com/103564714/164903640-80c63e51-e27c-42da-b414-2a0de7f343d0.png)
+
 
 # ------------------------------------------------------------------------------
 # 3.1 密码错误测试
