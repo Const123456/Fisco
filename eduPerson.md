@@ -186,8 +186,9 @@ contract eduPerson is eduPersonStorage {
 ![image](https://user-images.githubusercontent.com/103564714/164889222-405200b6-09dd-4a9f-b9c3-fbda890ac6b2.png)
 ![image](https://user-images.githubusercontent.com/103564714/164889227-7ebbe95c-e5f9-4806-b307-aee312d5329a.png)
 
---------------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------
 错误测试
+
 ![image](https://user-images.githubusercontent.com/103564714/164889258-8501f431-d1be-40b5-8060-949a3d781851.png)
 ![image](https://user-images.githubusercontent.com/103564714/164889276-81d440f0-0b31-4a8d-b44d-7d993af659f1.png)
 
