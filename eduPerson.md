@@ -1,6 +1,6 @@
 # 小测 eduPerson智能合约
 
-
+# 一, 合约编写
 1, eduPersonStorage
 ```
 pragma solidity ^0.4.25;
@@ -168,7 +168,9 @@ contract eduPerson is eduPersonStorage {
   }
 ```
 
-# 测试参数
+# 二, 测试用例
+
+# 1, 测试参数
 ```
 学生注册Param : ["1","2624134616","123456","15314908141","2624@qq.com","fb","sz","rgzn","blockchain","2","student"]
 学生登录Param : ["student","2624134616","123456"]
@@ -179,7 +181,7 @@ contract eduPerson is eduPersonStorage {
 工作人员注册Param : ["3","13666","123456","1353698789","2622@qq.com","zs","sz","rgzn","blockchain","2"]
 工作人员登录Param : ["13666","123456"]
 ```
-用户测试结果
+# 2,用户测试结果
 
 ![image](https://user-images.githubusercontent.com/103564714/164889199-f8b5b42b-c877-40c0-9c48-2c8028fbc50b.png)
 ![image](https://user-images.githubusercontent.com/103564714/164889206-2e2cd1b7-b9c1-404a-bf73-c93f62438a39.png)
@@ -187,20 +189,22 @@ contract eduPerson is eduPersonStorage {
 ![image](https://user-images.githubusercontent.com/103564714/164889227-7ebbe95c-e5f9-4806-b307-aee312d5329a.png)
 
 # ------------------------------------------------------------------------------
-错误测试
+# 2.1 密码错误测试
 
 ![image](https://user-images.githubusercontent.com/103564714/164889258-8501f431-d1be-40b5-8060-949a3d781851.png)
 ![image](https://user-images.githubusercontent.com/103564714/164889276-81d440f0-0b31-4a8d-b44d-7d993af659f1.png)
 
 # ------------------------------------------------------------------------------
-老师测试结果
+# 3,老师测试结果
+
+
 ![image](https://user-images.githubusercontent.com/103564714/164889471-5a860434-8953-4c49-b140-8a7b81215d9a.png)
 ![image](https://user-images.githubusercontent.com/103564714/164889474-a874f3a6-a5ae-4948-8f80-0d91b87dff19.png)
 ![image](https://user-images.githubusercontent.com/103564714/164889480-f21a9983-f359-4e1b-ad31-498f23b38fca.png)
 ![image](https://user-images.githubusercontent.com/103564714/164889482-79ede1cc-66b0-4001-bf3f-ffb53baa3ac7.png)
 
 # ------------------------------------------------------------------------------
-错误测试
+# 3.1 错误测试
 
 ![image](https://user-images.githubusercontent.com/103564714/164889488-1eb446e8-0316-4fd1-84f9-54035f76c217.png)
 ![image](https://user-images.githubusercontent.com/103564714/164889491-159004ee-d397-443e-bcc7-1a3454cebe83.png)
