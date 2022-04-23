@@ -204,12 +204,12 @@ contract eduPerson is eduPersonStorage {
 ![image](https://user-images.githubusercontent.com/103564714/164889482-79ede1cc-66b0-4001-bf3f-ffb53baa3ac7.png)
 
 # ------------------------------------------------------------------------------
-# 3.1 错误测试
+# 3.1 密码错误测试
 
 ![image](https://user-images.githubusercontent.com/103564714/164889488-1eb446e8-0316-4fd1-84f9-54035f76c217.png)
 ![image](https://user-images.githubusercontent.com/103564714/164889491-159004ee-d397-443e-bcc7-1a3454cebe83.png)
 
-# 学校和老师测试结果一致 这里就不测试了~
+# 工作人员和老师测试结果一致 这里就不测试了~
 
 
 
