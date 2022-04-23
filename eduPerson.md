@@ -158,11 +158,13 @@ contract eduPerson is eduPersonStorage {
     
     
    // 登录
-    function login(string memory _type, string memory _account, string memory _password) public view returns (bool) {
+    function login(string memory _type, string memory _account, string memory _password) public view returns (Person) {
         require(userExists(_type,_account),"user no found.");
         // 因为前面新增的时候密码已经加密过了 所以这里不用再次加密对比 只需把入参_password加密
         require(accountMap[_type][_account].Password == keccak256(_password),"password is no right");
-        return true;
+        Person p = accountMap[_type][_account];
+        // 返回用户前端判断登录角色
+        return p;
     }
     
   }
@@ -186,7 +188,8 @@ contract eduPerson is eduPersonStorage {
 ![image](https://user-images.githubusercontent.com/103564714/164889199-f8b5b42b-c877-40c0-9c48-2c8028fbc50b.png)
 ![image](https://user-images.githubusercontent.com/103564714/164889206-2e2cd1b7-b9c1-404a-bf73-c93f62438a39.png)
 ![image](https://user-images.githubusercontent.com/103564714/164889222-405200b6-09dd-4a9f-b9c3-fbda890ac6b2.png)
-![image](https://user-images.githubusercontent.com/103564714/164889227-7ebbe95c-e5f9-4806-b307-aee312d5329a.png)
+![image](https://user-images.githubusercontent.com/103564714/164901902-ac41ca63-9763-4376-866b-c8af43c53e8e.png)
+
 
 # ------------------------------------------------------------------------------
 # 2.1 密码错误测试
