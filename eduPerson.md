@@ -160,6 +160,7 @@ contract eduPerson is eduPersonStorage {
    // 登录
     function login(string memory _type, string memory _account, string memory _password) public view returns (bool) {
         require(userExists(_type,_account),"user no found.");
+        // 因为前面新增的时候密码已经加密过了 所以这里不用再次加密对比 只需把入参_password加密
         require(accountMap[_type][_account].Password == keccak256(_password),"password is no right");
         return true;
     }
