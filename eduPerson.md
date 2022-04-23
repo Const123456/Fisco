@@ -1,0 +1,82 @@
+# 小测 eduPerson智能合约
+
+
+1, eduPersonStorage
+```
+pragma solidity ^0.4.25;
+
+contract eduPersonStorage {
+    
+    struct Person {
+        string Id;               // 0 id
+        string Account;          // 1 账户
+        bytes32 Password;        // 2 密码
+        string Phone;            // 3 电话
+        string Email;            // 4 邮箱
+        string Name;             // 5 姓名
+        string Address;          // 6 地址
+        string College;          // 7 学院
+        string Department;       // 8 系别
+        string Class;            // 9 班级
+        string Type;             //10 类型
+        bool isVaild;
+    }
+    
+    // accountMap[_type][_account]
+    mapping(string => mapping(string => Person)) accountMap;
+    
+    mapping(string => Person) id2PersonMap;
+    
+    string[] public accountCount;   //账户索引
+    
+    
+    
+    // 1, 注册
+    function _insertPerson (
+        string _id,
+        string _account,
+        string _password,
+        string _phone,
+        string _email,
+        string _name,
+        string _address,
+        string _college,
+        string _department,
+        string _class,
+        string _type
+     )  internal {
+        Person storage p = accountMap[_type][_account];
+        p.Id = _id;
+        p.Account = _account;
+        p.Password = keccak256(abi.encodePacked(_password));
+        p.Phone = _phone;
+        p.Type = _type;
+        p.Email = _email;
+        p.Name = _name;
+        p.Address = _address;
+        p.College = _college;
+        p.Department = _department;
+        p.Class = _class;
+        p.Type = _type;
+        accountMap[_type][_account].isVaild = true;
+        id2PersonMap[p.Id] = p;
+        accountCount.push(_account);
+    }
+    
+    function userExists(string _type, string _account) internal view returns(bool) {
+        if (accountMap[_type][_account].isVaild) {
+            return true;
+        } 
+            return false;
+    }
+
+    function userIdExists(string _id) internal view returns(bool) {
+        if(id2PersonMap[_id].isVaild){
+            return true;
+        }
+            return false;
+    }
+
+        
+  }
+```
