@@ -27,8 +27,6 @@ contract eduPersonStorage {
     
     mapping(string => Person) id2PersonMap;
     
-    string[] public accountCount;   //账户索引
-    
     
     
     // 1, 注册
@@ -60,7 +58,6 @@ contract eduPersonStorage {
         p.Type = _type;
         accountMap[_type][_account].isVaild = true;
         id2PersonMap[p.Id] = p;
-        accountCount.push(_account);
     }
     
     // 判断用户是否存在
@@ -171,7 +168,16 @@ contract eduPerson is eduPersonStorage {
 ```
 
 # 测试参数
-![image](https://user-images.githubusercontent.com/103564714/164889150-c308f455-a14d-4a81-b89c-20d95f736a54.png)
+```
+学生注册Param : ["1","2624134616","123456","15314908141","2624@qq.com","fb","sz","rgzn","blockchain","2","student"]
+学生登录Param : ["student","2624134616","123456"]
+
+老师注册Param : ["2","13878","123456","13534006689","2628@qq.com","zs","sz","rgzn","blockchain","2"]
+老师登录Param : ["teacher",[13878],"123456"]
+
+工作人员注册Param : ["3","13666","123456","1353698789","2622@qq.com","zs","sz","rgzn","blockchain","2"]
+工作人员登录Param : ["13666","123456"]
+```
 
 // 用户测试结果
 ![image](https://user-images.githubusercontent.com/103564714/164889199-f8b5b42b-c877-40c0-9c48-2c8028fbc50b.png)
